@@ -8,8 +8,6 @@ use warnings;
 use File::Basename ();
 
 use Eve::Email;
-use Eve::EventHandler::ExternalProfileAdd;
-use Eve::EventHandler::ExternalSignup;
 use Eve::EventMap;
 use Eve::HttpOutput;
 use Eve::HttpRequest::Psgi;
