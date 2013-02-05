@@ -6,7 +6,7 @@ use warnings;
 
 =head1 NAME
 
-Eve - The great new Eve!
+Eve - The web service creation framework written with events in mind.
 
 =head1 VERSION
 
@@ -19,37 +19,129 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
+Currently Eve supports running web services under Apache2 with
+mod_perl2 using the PSGI protocol. To run a web service you need to
+create a PSGI event handler:
 
-Perhaps a little code snippet.
+    #!/usr/bin/perl
 
-    use Eve;
+    use utf8;
+    use strict;
+    use warnings;
 
-    my $foo = Eve->new();
-    ...
+    use open qw(:std :utf8);
+    use charnames qw(:full);
 
-=head1 EXPORT
+    use Cwd qw(abs_path);
+    use File::Spec;
+    use Plack::Request;
+    use YAML;
 
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
+    use Eve::Event::PsgiRequestReceived;
 
-=head1 SUBROUTINES/METHODS
+    return sub {
+        my $env = shift;
 
-=head2 function1
+        my $event = Eve::Event::PsgiRequestReceived->new(
+            env_hash => $env,
+            event_map => $Eve::Registry::instance->get_event_map());
 
-=cut
+        chdir($Eve::Registry::instance->working_dir_string);
 
-sub function1 {
-}
+        $event->trigger();
 
-=head2 function2
+        return $event->response->get_raw_list();
+    };
 
-=cut
+=head1 DESCRIPTION
 
-sub function2 {
-}
+=head2 Layers of the system
+
+The first layer of the system is the application layer that is
+responsible for assembling all the components and dealing with
+features specific to the type of the built program. It is the entry
+point of the system. This layer operates with the delegation layer.
+
+The second one is the delegation layer. It is a control delegation
+facility based on a map of controlling events and handling code. For
+example an event of the "blog post entry creation" type could initiate
+delegation of control to quota check and statistics handlers
+independently. This layer operates with the controlling layer and
+could be requested by any other layer.
+
+The third one is the controlling layer. Some applications, like web
+services, could consist of many handling code parts mapped to many
+types of controlling events. Each of the code parts itself could
+resemble the MVC pattern controller component for example. So to post
+a new blog post entry we might need to call a blog post creation
+handler as an original MVC controller. This layer operates with the
+enterprise layer.
+
+The forth one is the enterprise layer. It might be represented as the
+model and view parts of MVC pattern components interacting with each
+other. In case of the blog posting example the model is a set of
+objects representing a blog and the view is a template engine
+interface that is responsible for building output. This layer operates
+with the tools layer.
+
+The fifth is the environmental layer. It includes things like database
+adaptation code, external systems integration, template and output
+engines internals. It interacts with databases, web services,
+operation system and other external information sources.
+
+=head2 Registry of services
+
+The Inversion of Control is used as a base framework components
+manipulation principle. It is reflected on the system as a registry of
+services. A service is a definition of how the component should be
+implemented and instantiated and which other components it depends on.
+
+There is a central registry of the framework that contains generic
+services. Also every subsystem has its own registry that the central
+one refers to. So we have a hierarchical structure where we can
+conveniently manage implementations without affecting the problem
+specific parts.
+
+=head2 Controlling events
+
+Another technique we use to favor better decoupling of the components
+is the Event-driven approach. There are three entities in the
+implemented concept - an event itself, an event handler and the
+mapping facility to map events to handlers. One event could be
+inherited from another. This inheritance is used when triggering
+events so the derivative will be triggered by handlers listening for
+its ancestors.
+
+=head2 Enterprise modeling
+
+The modeling infrastructure of the framework is based on a set of
+simple data objects managed by a set of model classes. The data
+objects are simple field containers with service behavior injections
+like serialization/deserialization. The domain logic is encapsulated
+in the model classes. For example a blog post object having a title
+and text fields is a data object and blogging is a model class
+implementing such functionality as appending new post, listing blog
+entries, etc.
+
+The model classes interact with a persistence layer through data
+gateways. These gateways implement data level functionality
+adaptation. For example the comments gateway could implement select,
+insert, update and delete operations for the comments database table
+and transform data rows into comment data objects and vice versa. As
+data gateways are differentiated based on data storage logic they can
+be used by different model classes. For example comments gateway can
+be used by blogging model and activity stream model.
+
+=head2 Running an application
+
+When building an application first of all we need to create the
+application script. The script itself should create a registry
+instance, map events to their handlers, setup other application
+specific stuff and generate the initial event.
 
 =head1 AUTHOR
+
+Sergey Konoplev, C<< <gray.ru at gmail.com> >>
 
 Igor Zinovyev, C<< <zinigor at gmail.com> >>
 
@@ -97,7 +189,7 @@ L<http://search.cpan.org/dist/Eve/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2012 Igor Zinovyev.
+Copyright 2009-2013 Igor Zinovyev, Sergey Konoplev.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
