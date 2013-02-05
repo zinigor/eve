@@ -21,7 +21,65 @@ our $VERSION = '0.01';
 
 Currently Eve supports running web services under Apache2 with
 mod_perl2 using the PSGI protocol. To run a web service you need to
-create a PSGI event handler:
+prepare a configuration file, create a startup script and create a
+PSGI event handler.
+
+=head2 The startup script
+
+The startup script is required to prepare all needed objects in order
+for the web service to run. To make a "Hello, World!" application we
+need to have a minimal script located in the C<bin> folder of the
+installation like this:
+
+    #!/usr/bin/perl
+    use lib::abs '../lib';
+
+    use warnings;
+    use strict;
+
+    use File::Basename ();
+    use File::Spec ();
+    use YAML ();
+
+    use Eve::Registry;
+    use Eve::Support;
+
+    sub main {
+
+        # Make sure we are in a sane environment.
+        $ENV{MOD_PERL} or die 'not running under mod_perl!';
+
+        my $dirname = File::Basename::dirname(__FILE__);
+
+        my $file_path = File::Spec->catfile($dirname, '../etc/hello.yaml');
+
+        $Eve::Registry::instance = Eve::Registry->new(%{
+            YAML::LoadFile(
+                Eve::Support::open(mode => '<', file => $file_path))});
+
+        $Eve::Registry::instance->bind();
+
+        return;
+    }
+
+    main();
+
+    1;
+
+=head2 The configuration file
+
+As you can see from the startup script example, the application draws
+its initialization parameters from the hello.yaml file which is
+located in the C<etc> folder of the installation:
+
+    base_uri_string: http://example.com/base-uri
+
+All keys and values represented in this file will be automatically
+passed to the registry object constructor.
+
+=head2 The event handler
+
+Last but not least, the PSGI event handler script:
 
     #!/usr/bin/perl
 
@@ -52,6 +110,20 @@ create a PSGI event handler:
 
         return $event->response->get_raw_list();
     };
+
+Those scripts must be set as a startup and request event handlers in
+your C<VirtualHost> apache setting:
+
+    # This is the startup script, it will be run on each apache service
+    # start
+    PerlPostConfigRequire /var/www/helloworld/bin/startup.pl
+
+    PerlSetupEnv Off
+    SetHandler perl-script
+    PerlResponseHandler Plack::Handler::Apache2
+
+    # This is the PSGI request event handler script
+    PerlSetVar psgi_app /var/www/dev/toozla/server/bin/http.psgi
 
 =head1 DESCRIPTION
 
