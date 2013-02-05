@@ -41,6 +41,10 @@ B<Eve::HttpResponse> - an HTTP response adapter.
 The class is an adapter for the Plack::Request module. It is used to
 store the response data before it is being sent to the client.
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -51,8 +55,6 @@ sub init {
 
     return;
 }
-
-=head1 METHODS
 
 =head2 B<set_header()>
 

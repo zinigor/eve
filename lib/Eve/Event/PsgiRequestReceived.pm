@@ -46,6 +46,10 @@ an environment hash passed by the PSGI handler.
 
 =back
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {

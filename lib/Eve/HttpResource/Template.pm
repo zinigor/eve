@@ -120,6 +120,10 @@ following structure:
 
 =back
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -152,8 +156,6 @@ sub init {
 
     return;
 }
-
-=head2 METHODS
 
 =head2 B<get_text()>
 

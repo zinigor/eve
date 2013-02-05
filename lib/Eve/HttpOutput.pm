@@ -31,6 +31,10 @@ a filehandle to write the output data to. Usualy it is STDOUT,
 
 =back
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {

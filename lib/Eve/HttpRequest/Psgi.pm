@@ -47,6 +47,10 @@ an environment hash that is supplied to an application by a PSGI handler.
 
 =back
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -70,8 +74,6 @@ sub init {
 
     return;
 }
-
-=head1 METHODS
 
 =head2 B<get_uri>
 

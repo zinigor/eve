@@ -47,6 +47,10 @@ an event map object (C<Eve::EventMap>).
 
 =back
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {

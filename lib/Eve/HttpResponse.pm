@@ -31,6 +31,10 @@ B<Eve::HttpResponse> - an HTTP response abstract class.
 The class is an interface defining abstraction that is required to be
 used as a parent class for various HTTP response implementations.
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -43,8 +47,6 @@ sub init {
 
     return;
 }
-
-=head1 METHODS
 
 =head2 B<set_header()>
 

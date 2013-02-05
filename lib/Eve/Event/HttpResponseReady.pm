@@ -46,6 +46,10 @@ an HTTP response object.
 
 =back
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {

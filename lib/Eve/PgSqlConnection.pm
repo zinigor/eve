@@ -55,6 +55,10 @@ use).
 
 For default argument values see the B<DBD::Pg> documentation.
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {

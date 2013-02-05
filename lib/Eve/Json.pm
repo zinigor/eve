@@ -27,6 +27,10 @@ B<Eve::Json> - a JSON converter adapter.
 The B<Eve::Json> class adapts the functionality of the JSON::XS
 module to provide JSON encoding and decoding features service.
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -36,8 +40,6 @@ sub init {
 
     $self->json->utf8();
 }
-
-=head1 METHODS
 
 =head2 B<encode()>
 

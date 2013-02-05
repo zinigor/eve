@@ -29,6 +29,10 @@ B<Eve::EventMap> is the facility on the one hand used to bind
 events to event handlers, on the other hand to extract handlers that
 need to be run when a certain event is triggered.
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -38,8 +42,6 @@ sub init {
 
     return;
 }
-
-=head1 METHODS
 
 =head2 B<bind()>
 

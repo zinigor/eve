@@ -86,6 +86,10 @@ so an attempt will be made to use standard PostgreSQL environment
 variables. For the C<pgsql_schema> the default 'public' value will be
 used.
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {

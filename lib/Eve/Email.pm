@@ -31,6 +31,10 @@ The from address line that will be added to each sent email.
 
 =back
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -41,8 +45,6 @@ sub init {
 
     return;
 }
-
-=head1 METHODS
 
 =head2 B<send()>
 

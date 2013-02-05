@@ -87,6 +87,10 @@ definition format.
 
 =back
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -120,6 +124,10 @@ sub init {
     return;
 }
 
+=head2 B<_transform_parameter_list()>
+
+=cut
+
 sub _transform_parameter_list {
     my ($self, %arg_hash) = @_;
     Eve::Support::arguments(\%arg_hash, my $raw_list);
@@ -139,8 +147,6 @@ sub _transform_parameter_list {
 
     return $result_list;
 }
-
-=head1 METHODS
 
 =head2 B<execute()>
 

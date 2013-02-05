@@ -74,6 +74,10 @@ PostgreSQL databases and common dependencies between these services.
 By default all arguments are C<undef> so the database adapter will
 attempt to use standard PostgreSQL environment variables.
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -91,8 +95,6 @@ sub init {
 
     return;
 }
-
-=head1 METHODS
 
 =head2 B<get_connection()>
 
@@ -311,6 +313,7 @@ sub get_text {
 
     return $self->_text;
 }
+
 =head2 B<get_timestamp_with_time_zone()>
 
 A PostgreSQL timestamp with time zone type lazy loader service.

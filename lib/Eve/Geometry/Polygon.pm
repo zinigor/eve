@@ -20,6 +20,10 @@ projection purposes.
 
 The class is a polygon geometry object.
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -29,9 +33,6 @@ sub init {
     $self->{'length'} = scalar @{$data};
     $self->{'data'} = $data;
 }
-
-
-=head1 METHODS
 
 =head2 B<export()>
 

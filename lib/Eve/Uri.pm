@@ -94,6 +94,10 @@ semicolon character (':').
 
 =back
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -195,8 +199,6 @@ sub _set_fragment {
 
     return $self->fragment;
 }
-
-=head1 METHODS
 
 =head2 B<clone()>
 

@@ -70,6 +70,10 @@ use constant {
 
 The same as the attributes described above.
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {

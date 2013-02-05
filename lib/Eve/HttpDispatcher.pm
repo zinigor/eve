@@ -69,6 +69,10 @@ will be used for resource matching.
 
 =back
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -91,8 +95,6 @@ sub init {
 
     return;
 }
-
-=head1 METHODS
 
 =head2 B<bind()>
 

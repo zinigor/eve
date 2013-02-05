@@ -20,6 +20,10 @@ B<Eve::Geometry::Point> - a point geometry class for map projection purposes.
 The class is a base for a generic geometry object that is required in
 all operations with objects on the map projection.
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
@@ -29,9 +33,6 @@ sub init {
     $self->{'latitude'} = $data->[0];
     $self->{'longitude'} = $data->[1];
 }
-
-
-=head1 METHODS
 
 =head2 B<export()>
 

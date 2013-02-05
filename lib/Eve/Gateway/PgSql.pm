@@ -47,6 +47,10 @@ a B<Eve::Registry::PgSql> instance.
 
 =back
 
+=head1 METHODS
+
+=head2 B<init()>
+
 =cut
 
 sub init {
