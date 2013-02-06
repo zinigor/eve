@@ -39,7 +39,7 @@ You can also look for information at:
 
 ## LICENSE AND COPYRIGHT ##
 
-Copyright (C) 2012 Igor Zinovyev
+Copyright (C) 2010-2013 Igor Zinovyev, Sergey Konoplev
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
