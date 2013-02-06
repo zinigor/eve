@@ -8,6 +8,7 @@ use warnings;
 use POSIX qw(strtod);
 
 use Eve::Geometry::Point;
+use Eve::Geometry::Polygon;
 
 =head1 NAME
 
@@ -56,15 +57,34 @@ sub from_string {
     my ($class, %arg_hash) = @_;
     Eve::Support::arguments(\%arg_hash, my ($string));
 
-    $string =~ s/^POINT\(//;
-    $string =~ s/\)$//g;
+    my $result;
+    if ($string =~ m/^POINT/) {
 
-    my ($lng, $lat) = split(' ', $string);
+        $string =~ s/^POINT\(//;
+        $string =~ s/\)$//g;
 
-    $lat = strtod($lat);
-    $lng = strtod($lng);
+        my ($lng, $lat) = split(' ', $string);
 
-    return Eve::Geometry::Point->new(data => [$lat, $lng]);
+        $lat = strtod($lat);
+        $lng = strtod($lng);
+
+        $result = Eve::Geometry::Point->new(data => [$lat, $lng]);
+    } else {
+        $string =~ s/^POLYGON\(\(//;
+        $string =~ s/\)\)$//g;
+
+        my $data = [];
+        my @pairs = split(',', $string);
+
+        map {
+            my ($lng, $lat) = split(' ', $_);
+            $lat = strtod($lat);
+            $lng = strtod($lng);
+            push @{$data}, [$lat, $lng];
+        } @pairs;
+
+        $result = Eve::Geometry::Polygon->new(data => $data);
+    }
 }
 
 
