@@ -64,11 +64,11 @@ sub serialize {
     my ($self) = @_;
 
     return (
-        'POLYGON('
+        'POLYGON(('
         . join(
             ',',
             map { join(' ', reverse(@{$_})) } @{$self->export()})
-        . ')');
+        . '))');
 }
 
 =head1 SEE ALSO
