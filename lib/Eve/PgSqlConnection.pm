@@ -76,11 +76,6 @@ sub init {
              pg_server_prepare => 1, pg_enable_utf8 => 1
          });
 
-    my $schema_statement =
-        $self->{'dbh'}->prepare(q{SET search_path TO ?, public});
-
-    $schema_statement->execute($schema or 'public');
-
     return;
 }
 
