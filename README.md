@@ -4,7 +4,10 @@ eve
 An object oriented perl application framework written with events in mind.
 
 This module is a framework that allows easy creation of web services
-using the Apache and mod_perl2 stack.
+using the [PSGI](http://plackperl.org) protocol.
+
+See the ["Hello, World!"](https://github.com/zinigor/eve-helloworld)
+application for an example that you can build a web service upon.
 
 ## INSTALLATION ##
 
