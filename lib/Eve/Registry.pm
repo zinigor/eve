@@ -466,19 +466,6 @@ sub get_json {
         });
 }
 
-=head2 B<bind()>
-
-Binds HTTP resources to the dispatcher and event handlers to the event
-map.
-
-=cut
-
-sub bind {
-    my $self = shift;
-
-    return;
-}
-
 =head2 B<add_binding>
 
 A shorthand method for binding resources to specific URI
@@ -531,7 +518,6 @@ sub _get_template_http_resource_parameter_list {
 
     return {
         %{$self->_get_http_resource_parameter_list()},
-        content_model => $self->get_content_model(),
         template => $self->get_template(),
         template_var_hash => $self->get_template_var_hash(),
         text_var_hash => $self->template_text_hash};

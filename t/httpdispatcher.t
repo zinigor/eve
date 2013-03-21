@@ -105,11 +105,14 @@ sub test_handle_exception_data : Test(2) {
 
     $self->{'dispatcher'}->handle(event => $self->{'event'});
 
-    is($self->{'http_resource'}->process_count, 1);
+    is(
+        $self->{'http_resource'}->process_count,
+        1,
+        'The process method should be called only once');
 
     isa_ok(
         $self->{'http_resource'}->call_args->{'exception'},
-        'Eve::Exception::Data');
+        'Eve::Exception::Http::400BadRequest');
 }
 
 sub test_handle_matched : Test(10) {
@@ -385,7 +388,7 @@ sub init {
 sub _get {
     my ($self, %arg_hash) = @_;
 
-    Eve::Exception::Data->throw(message => $arg_hash{'message'});
+    Eve::Exception::Http::400BadRequest->throw(message => $arg_hash{'message'});
 }
 
 1;
