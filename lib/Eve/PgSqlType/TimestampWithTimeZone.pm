@@ -85,6 +85,10 @@ sub serialize {
     my ($self, %arg_hash) = @_;
     Eve::Support::arguments(\%arg_hash, my $value);
 
+    if (not defined $value) {
+        return 'NULL';
+    }
+
     return DateTime::Format::Pg->format_timestamp_with_time_zone($value);
 }
 
