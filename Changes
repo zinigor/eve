@@ -1,5 +1,17 @@
 Revision history for Eve
 
-0.01    05-Feb-2013/12:00:00+3000
-        First version released, added test cases.
+0.02    Sun, 24 Mar 2013 17:58:00 +4000
+        * Fixed POD coverage.
+        * Added the tmp folder to gitignore.
+        * Fixed the timestamp type serialization.
+        * Fixed the Template HTTP resource.
+        * Updated the README.md file with a link.
+        * Fixed the geometry factory.
+        * Fixed the polygon geometry type serialization.
+        * Fixed copyright dates, added an author.
+        * Copied the README contents to the markdown readme version.
+        * Added test cases.
+
+0.01    Tue, 05 Feb 2013 12:00:00 +4000
+        * First version released, added test cases.
 
