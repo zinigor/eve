@@ -9,6 +9,25 @@ use DBD::Pg ();
 use Test::MockObject;
 use Test::MockObject::Extends;
 
+=head1 NAME
+
+B<Eve::DbiStub> - a stub for replacing the database in unit tests.
+
+=head1 SYNOPSIS
+
+    my $data_hash = Eve::DbiStub->get_compiled_data();
+
+    my $function_return_data = $data_hash->{'test_function_1'}->{'data'};
+
+=head1 METHODS
+
+=head2 B<get_compiled_data()>
+
+Returns compiled data that is to be returned from stored procedures
+after being processed by a database adapter.
+
+=cut
+
 sub get_compiled_data {
     my ($data_hash, $result) = (get_data(), undef);
 
@@ -60,6 +79,13 @@ sub get_compiled_data {
 
     return $compiled_data;
 }
+
+=head2 B<get_data()>
+
+Returns raw data that is to be returned from stored procedures prior
+to being processed by the database adapter.
+
+=cut
 
 sub get_data {
 
@@ -183,6 +209,12 @@ sub get_data {
     return $data_hash_list;
 }
 
+=head2 B<mock_sth()>
+
+Returns a mock statement handle.
+
+=cut
+
 sub mock_sth {
     my $sql = shift;
 
@@ -286,6 +318,12 @@ sub mock_sth {
     return $sth_mock;
 }
 
+=head2 B<mock_dbh()>
+
+Returns a mock database connection handle.
+
+=cut
+
 sub mock_dbh {
     my @arg_list = @_;
 
@@ -304,11 +342,59 @@ sub mock_dbh {
     return $dbh_mock->connect(@arg_list);
 }
 
+=head2 B<main()>
+
+Main procedure that is being run when the module is being
+required. Fakes the DBI package by replacing it with a
+B<Test::MockObject> object.
+
+=cut
+
 sub main {
     Test::MockObject::Extends->new('DBI')->fake_module(
         'DBI', 'connect' => sub { return mock_dbh(@_); });
 }
 
 main();
+
+=head1 SEE ALSO
+
+=over 4
+
+=item L<DBI>
+
+=item L<DBD::Pg>
+
+=item L<Eve::Test>
+
+=item L<Test::Class>
+
+=item L<Test::MockObject>
+
+=item L<Test::MockObject::Extends>
+
+=back
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2010-2013 Sergey Konoplev, Igor Zinovyev.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
+
+=head1 AUTHOR
+
+=over 4
+
+=item L<Sergey Konoplev|mailto:gray.ru@gmail.com>
+
+=item L<Igor Zinovyev|mailto:zinigor@gmail.com>
+
+=back
+
+=cut
 
 1;

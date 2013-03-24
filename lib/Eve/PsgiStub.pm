@@ -8,6 +8,69 @@ use Eve::RegistryStub;
 use Eve::HttpRequest::Psgi;
 use Eve::Registry;
 
+=head1 NAME
+
+B<Eve::PsgiStub> - a stub class to easily create mock versions of HTTP requests.
+
+=head1 SYNOPSIS
+
+    use Eve::PsgiStub;
+
+    my $request = Eve::PsgiStub->get_request(
+        'method' => $method_string,
+        'uri' => $uri_string,
+        'host' => $domain_strin,
+        'query' => $query_string,
+        'cookie' => $cookie_string);
+
+=head1 DESCRIPTION
+
+B<Eve::PsgiStub> is a helper abstract factory class that generates
+HTTP requests for making tests easier.
+
+=head1 METHODS
+
+=head2 B<get_request()>
+
+Returns a B<Eve::HttpRequest::Psgi> object based on arguments. All
+arguments are optional.
+
+=head3 Arguments
+
+=over 4
+
+=item C<uri>
+
+a request URI part string, defaults to C</>,
+
+=item C<host>
+
+a request host string, defaults to C<example.localhost>,
+
+=item C<query>
+
+a request URI query string part, defaults to an empty string,
+
+=item C<method>
+
+a request method string, defaults to C<GET>
+
+=item C<body>
+
+a request body, defaults to an empty string
+
+=item C<cookie>
+
+a request C<Set-Cookie> string, defaults to an empty string,
+
+=item C<content_type>
+
+a request C<content-type> string, defaults to an empty string.
+
+=back
+
+=cut
+
 sub get_request {
     my ($self, %arg_hash) = @_;
     Eve::Support::arguments(
@@ -88,5 +151,37 @@ sub get_request {
         },
         env_hash => $env_hash);
 }
+
+=head1 SEE ALSO
+
+=over 4
+
+=item L<Eve::Test>
+
+=item L<Test::Class>
+
+=back
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2010-2013 Sergey Konoplev, Igor Zinovyev.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
+
+=head1 AUTHOR
+
+=over 4
+
+=item L<Sergey Konoplev|mailto:gray.ru@gmail.com>
+
+=item L<Igor Zinovyev|mailto:zinigor@gmail.com>
+
+=back
+
+=cut
 
 1;

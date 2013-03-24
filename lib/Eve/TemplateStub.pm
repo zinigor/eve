@@ -11,6 +11,37 @@ use Data::Dumper;
 
 my $stash_stub = {};
 
+=head1 NAME
+
+B<Eve::TemplateStub> - a stub class that replaces the template class
+with a mock.
+
+=head1 SYNOPSIS
+
+    use Eve::TemplateStub;
+    use Eve::Template;
+
+    my $mocked_template = Eve::Template->new(
+        path => $path_string,
+        compile_path => $compile_path_string,
+        expiration_interval => $interval_value);
+
+    my $output = $template->process(
+        file => $file_name, var_hash => $var_hash);
+
+=head1 DESCRIPTION
+
+B<Eve::TemplateStub> is a class that provides a mocked template object
+with limited stubbed templating functionality..
+
+=head1 METHODS
+
+=head2 B<mock_template()>
+
+Returns a mocked B<Eve::Template> object.
+
+=cut
+
 sub mock_template {
     my @args = @_;
 
@@ -58,6 +89,10 @@ sub mock_template {
     return $template_mock->new(@args);
 }
 
+=head2 B<main()>
+
+=cut
+
 sub main {
     Test::MockObject::Extends->new('Template')->fake_module(
         'Template', 'new' => sub { return mock_template(@_); });
@@ -66,5 +101,37 @@ sub main {
 }
 
 main();
+
+=head1 SEE ALSO
+
+=over 4
+
+=item L<Eve::Test>
+
+=item L<Test::Class>
+
+=back
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2010-2013 Sergey Konoplev, Igor Zinovyev.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
+
+=head1 AUTHOR
+
+=over 4
+
+=item L<Sergey Konoplev|mailto:gray.ru@gmail.com>
+
+=item L<Igor Zinovyev|mailto:zinigor@gmail.com>
+
+=back
+
+=cut
 
 1;
