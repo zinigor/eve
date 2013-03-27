@@ -123,7 +123,7 @@ your C<VirtualHost> apache setting:
     PerlResponseHandler Plack::Handler::Apache2
 
     # This is the PSGI request event handler script
-    PerlSetVar psgi_app /var/www/dev/toozla/server/bin/http.psgi
+    PerlSetVar psgi_app /var/www/dev/eve/bin/http.psgi
 
 =head1 DESCRIPTION
 

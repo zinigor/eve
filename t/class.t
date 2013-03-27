@@ -12,7 +12,7 @@ sub test_bless : Test(2) {
     my $dummy = ClassTest::Dummy->new();
     my $another_dummy = $dummy->new();
 
-    isa_ok($dummy, 'Toozla::Class');
+    isa_ok($dummy, 'Eve::Class');
     isnt($another_dummy, $dummy);
 }
 
@@ -27,7 +27,7 @@ sub test_init : Test(2) {
 
 package ClassTest::Dummy;
 
-use parent qw(Toozla::Class);
+use parent qw(Eve::Class);
 
 sub init {
     my ($self, %args) = @_;

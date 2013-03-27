@@ -1,7 +1,7 @@
 # -*- mode: Perl; -*-
 package PgSqlTypeTimestampWithTimeZoneTest;
 
-use parent qw(Toozla::Test);
+use parent qw(Eve::Test);
 
 use strict;
 use warnings;
