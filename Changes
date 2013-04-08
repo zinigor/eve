@@ -1,5 +1,9 @@
 Revision history for Eve
 
+0.05    Sun Mar 24 10:32:45 2013 +0400
+        * Fixed POD coverage.
+        * Added the tmp folder to gitignore.
+
 0.04    Thu, 27 Mar 2013 08:49:11 +4000
         * Added dependencies.
         * Cleaned up some old stuff.
