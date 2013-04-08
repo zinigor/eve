@@ -10,11 +10,11 @@ Eve - The web service creation framework written with events in mind.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.05
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.05';
 
 
 =head1 SYNOPSIS
@@ -123,7 +123,7 @@ your C<VirtualHost> apache setting:
     PerlResponseHandler Plack::Handler::Apache2
 
     # This is the PSGI request event handler script
-    PerlSetVar psgi_app /var/www/dev/toozla/server/bin/http.psgi
+    PerlSetVar psgi_app /var/www/dev/eve/bin/http.psgi
 
 =head1 DESCRIPTION
 
